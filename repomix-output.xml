@@ -1,0 +1,1831 @@
+This file is a merged representation of a subset of the codebase, containing files not matching ignore patterns, combined into a single document by Repomix.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+4. Repository files, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching these patterns are excluded: abi
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+<additional_info>
+
+</additional_info>
+
+</file_summary>
+
+<directory_structure>
+.gitignore
+backtest_3970000_3990000_2.csv
+backtest_3970000_3990000_3.csv
+backtest_3970000_3990000.csv
+backtest.py
+blockchain_reader.py
+calculate_lp_value.py
+config.py
+lst_price_tracker.py
+read_reward_vault.py
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path=".gitignore">
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# dotenv
+.env
+
+# virtualenv
+venv/
+ENV/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+</file>
+
+<file path="backtest_3970000_3990000_2.csv">
+block,timestamp,best_token_symbol,token_price,apr,yield_bera,principal,lp_token
+3972000,1745187061,yBGT,1.75930256,1.964964,0.04297090,100.04297090,0x564f011D557aAd1cA09BFC956Eb8a17C35d490e0
+3974000,1745190962,yBGT,1.75647684,1.959555,0.04259471,100.08556562,0x564f011D557aAd1cA09BFC956Eb8a17C35d490e0
+3976000,1745194862,yBGT,1.75791261,1.959211,0.04262927,100.12819489,0x564f011D557aAd1cA09BFC956Eb8a17C35d490e0
+3978000,1745198759,yBGT,1.73493537,1.954930,0.04196572,100.17016061,0x564f011D557aAd1cA09BFC956Eb8a17C35d490e0
+3980000,1745202652,yBGT,1.73183987,1.953731,0.04183970,100.21200031,0x564f011D557aAd1cA09BFC956Eb8a17C35d490e0
+3982000,1745206542,yBGT,1.72598785,1.954810,0.04170661,100.25370692,0x564f011D557aAd1cA09BFC956Eb8a17C35d490e0
+3984000,1745210431,yBGT,1.72600329,1.957431,0.04176956,100.29547648,0x564f011D557aAd1cA09BFC956Eb8a17C35d490e0
+3986000,1745214332,yBGT,1.71855406,1.939419,0.04135096,100.33682745,0x564f011D557aAd1cA09BFC956Eb8a17C35d490e0
+3988000,1745218241,yBGT,1.70975513,1.940636,0.04126648,100.37809393,0x564f011D557aAd1cA09BFC956Eb8a17C35d490e0
+3990000,1745222136,LBGT,1.75061991,1.986722,0.04311900,100.42121293,0x564f011D557aAd1cA09BFC956Eb8a17C35d490e0
+3992000,1745226051,LBGT,1.74555260,1.987961,0.04326049,100.46447342,0x564f011D557aAd1cA09BFC956Eb8a17C35d490e0
+3994000,1745230356,LBGT,1.74462321,1.988175,0.04757023,100.51204365,0x564f011D557aAd1cA09BFC956Eb8a17C35d490e0
+3996000,1745234326,LBGT,1.72386169,1.990310,0.04341353,100.55545718,0x564f011D557aAd1cA09BFC956Eb8a17C35d490e0
+3998000,1745238265,yBGT,1.73716945,1.987093,0.04335561,100.59881279,0x564f011D557aAd1cA09BFC956Eb8a17C35d490e0
+4000000,1745242186,yBGT,1.71623091,1.986691,0.04264707,100.64145986,0x564f011D557aAd1cA09BFC956Eb8a17C35d490e0
+</file>
+
+<file path="backtest_3970000_3990000_3.csv">
+block,timestamp,best_token_symbol,token_price,apr,yield_bera,principal,lp_token
+</file>
+
+<file path="backtest_3970000_3990000.csv">
+block,timestamp,best_token_symbol,token_price,apr,yield_bera,principal,lp_token
+3972000,1745187061,yBGT,1.75930256,1.963516,0.04293925,100.04293925,0x564f011D557aAd1cA09BFC956Eb8a17C35d490e0
+3974000,1745190962,yBGT,1.75647684,1.958104,0.04256316,100.08550241,0x564f011D557aAd1cA09BFC956Eb8a17C35d490e0
+3976000,1745194862,yBGT,1.75791261,1.957768,0.04259785,100.12810026,0x564f011D557aAd1cA09BFC956Eb8a17C35d490e0
+3978000,1745198759,yBGT,1.73493537,1.953494,0.04193486,100.17003512,0x564f011D557aAd1cA09BFC956Eb8a17C35d490e0
+3980000,1745202652,yBGT,1.73183987,1.952295,0.04180891,100.21184403,0x564f011D557aAd1cA09BFC956Eb8a17C35d490e0
+3982000,1745206542,yBGT,1.72598785,1.953373,0.04167590,100.25351993,0x564f011D557aAd1cA09BFC956Eb8a17C35d490e0
+3984000,1745210431,yBGT,1.72600329,1.955985,0.04173863,100.29525856,0x564f011D557aAd1cA09BFC956Eb8a17C35d490e0
+3986000,1745214332,yBGT,1.71855406,1.937999,0.04132060,100.33657916,0x564f011D557aAd1cA09BFC956Eb8a17C35d490e0
+3988000,1745218241,yBGT,1.70975513,1.939220,0.04123626,100.37781542,0x564f011D557aAd1cA09BFC956Eb8a17C35d490e0
+3990000,1745222136,LBGT,1.75061991,1.985249,0.04308691,100.42090233,0x564f011D557aAd1cA09BFC956Eb8a17C35d490e0
+3992000,1745226051,LBGT,1.74555260,1.986488,0.04322830,100.46413064,0x564f011D557aAd1cA09BFC956Eb8a17C35d490e0
+3994000,1745230356,LBGT,1.74462321,1.986710,0.04753502,100.51166566,0x564f011D557aAd1cA09BFC956Eb8a17C35d490e0
+3996000,1745234326,LBGT,1.72386169,1.988848,0.04338148,100.55504714,0x564f011D557aAd1cA09BFC956Eb8a17C35d490e0
+3998000,1745238265,yBGT,1.73716945,1.985640,0.04332374,100.59837088,0x564f011D557aAd1cA09BFC956Eb8a17C35d490e0
+4000000,1745242186,yBGT,1.71623091,1.985300,0.04261703,100.64098791,0x564f011D557aAd1cA09BFC956Eb8a17C35d490e0
+</file>
+
+<file path="backtest.py">
+#!/usr/bin/env python3
+"""
+backtest.py
+============
+メインエントリ。
+└─ 他ファイルは *すべて本スクリプトのためのモジュール* として機能提供を行う。
+
+処理概要
+--------
+1. N ブロックごとに各 LST トークンの WBERA 建て価格を取得
+2. もっとも価格が高いトークンへ LP をルーティング
+3. LP APR × 運用時間を使って BERA 利益を計算・複利
+4. ①〜③を終了ブロックまでループ
+"""
+
+from __future__ import annotations
+
+import argparse
+import csv
+import logging
+from pathlib import Path
+from typing import Dict, List
+
+from blockchain_reader import get_block_timestamp
+from lst_price_tracker import LSTTokenPriceTracker
+from read_reward_vault import RewardVaultAnalyzer
+import config
+
+# Mapping from token address (lowercase) to symbol for quick lookup
+ADDRESS_TO_SYMBOL = {t["address"].lower(): t["symbol"] for t in config.LST_TOKENS}
+
+SECONDS_PER_YEAR: int = 365 * 24 * 3600
+LOG_FORMAT = "[%(levelname)s] %(message)s"
+
+
+def setup_logger(verbose: bool = False) -> None:
+    """Set up root logger."""
+
+    level = logging.DEBUG if verbose else logging.INFO
+    logging.basicConfig(level=level, format=LOG_FORMAT)
+
+
+def run_backtest(
+    lst_tokens: List[str],
+    start_block: int,
+    end_block: int,
+    interval: int,
+    initial_bera: float,
+    csv_path: Path | None = None,
+) -> float:
+    """Run back-test and return final BERA balance.
+
+    Parameters
+    ----------
+    lst_tokens : List[str]
+        LST token addresses
+    start_block : int
+        Start block number
+    end_block : int
+        End block number
+    interval : int
+        Block interval per routing
+    initial_bera : float
+        Initial principal in BERA
+    csv_path : Path | None
+        Optional CSV output path
+    """
+
+    principal: float = initial_bera
+    current_block: int = start_block
+
+    logging.info("START ▶ block=%s  principal=%.4f BERA", start_block, principal)
+
+    # CSV setup
+    csv_file = csv_path.open("w", newline="") if csv_path else None
+    csv_writer = csv.writer(csv_file) if csv_file else None
+    if csv_writer:
+        csv_writer.writerow(
+            [
+                "block",
+                "timestamp",
+                "best_token_symbol",
+                "token_price",
+                "apr",
+                "yield_bera",
+                "principal",
+                "lp_token",
+            ]
+        )
+
+    # ---- Initialize tracker once to reuse Web3 connection ----
+    tracker = LSTTokenPriceTracker(config.ALCHEMY_API_KEY, network=config.NETWORK)
+
+    # Shared Web3 provider for timestamp retrieval
+    web3 = tracker.reader.web3
+
+    def fetch_timestamp(block: int) -> int:
+        """Get block timestamp via shared Web3 connection."""
+        return web3.eth.get_block(block).timestamp
+
+    # Instantiate RewardVaultAnalyzer once to avoid per-loop overhead
+    analyzer = RewardVaultAnalyzer(
+        api_key=config.ALCHEMY_API_KEY,
+        network=config.NETWORK,
+        vault_address=config.REWARD_VAULT_ADDRESS,
+        lp_token_address=config.LP_ADDRESS,
+    )
+
+    def fetch_prices(block: int) -> Dict[str, float]:
+        """Batch-fetch all LST token prices at given block using shared tracker."""
+        infos = tracker.get_all_lst_prices_at_block(block)
+        return {info["address"].lower(): info["price_in_bera"] for info in infos}
+
+    # Fetch prices for the initial block once
+    prices_now: Dict[str, float] = fetch_prices(current_block)
+    if not prices_now:
+        logging.warning("価格データ取得失敗: block=%s", current_block)
+        return principal
+
+    # Cache timestamp for the starting block
+    ts_current: int = fetch_timestamp(current_block)
+
+    while (next_block := current_block + interval) <= end_block:
+        # ① price map for next_block (reuse in next iteration)
+        prices_next: Dict[str, float] = fetch_prices(next_block)
+        if not prices_next:
+            logging.warning("価格データ取得失敗: block=%s", next_block)
+            break
+
+        # ② decide best token using *current* block prices
+        best_token: str = max(prices_now, key=prices_now.get)
+        best_symbol: str = ADDRESS_TO_SYMBOL.get(best_token.lower(), best_token)
+        best_price_now: float = prices_now[best_token]
+
+        # ③ get price for same token at next_block (already fetched)
+        best_price_next: float | None = prices_next.get(best_token)
+        if best_price_next is None:
+            logging.warning("次ブロックで %s の価格取得失敗", best_token)
+            break
+
+        # ④ APR at current block (using the vault's LP token, not the LST itself)
+        apr_details = analyzer.get_apr_details_at_block(current_block)
+        apr: float = apr_details["apr_percentage"] / 100.0  # decimal
+
+        # ⑤ time delta
+        # Use cached ts_current; fetch only the next block's timestamp
+        ts_next: int = fetch_timestamp(next_block)
+        dt: int = ts_next - ts_current
+
+        # ⑤ yield (BERA)
+        yield_bera: float = apr * (dt / SECONDS_PER_YEAR) * best_price_next * principal
+        principal += yield_bera
+
+        logging.debug(
+            "BLOCK=%s token=%s price_now=%.4f price_next=%.4f apr=%.2f%% yield=%.4f principal=%.4f",
+            next_block,
+            best_token,
+            best_price_now,
+            best_price_next,
+            apr * 100,
+            yield_bera,
+            principal,
+        )
+
+        logging.info(
+            "block=%s winner=%s apr=%.2f%% lp=%s principal=%.4f",
+            next_block,
+            best_symbol,
+            apr * 100,
+            config.LP_ADDRESS,
+            principal,
+        )
+
+        if csv_writer:
+            csv_writer.writerow(
+                [
+                    next_block,
+                    ts_next,
+                    best_symbol,
+                    f"{best_price_next:.8f}",
+                    f"{apr:.6f}",
+                    f"{yield_bera:.8f}",
+                    f"{principal:.8f}",
+                    config.LP_ADDRESS,
+                ]
+            )
+
+        # ⑥ advance: reuse next prices as current for the following loop
+        prices_now = prices_next
+        # Prepare for next iteration
+        current_block = next_block
+        ts_current = ts_next
+
+    if csv_file:
+        csv_file.close()
+
+    logging.info("END   ▶ block=%s  principal=%.4f BERA", end_block, principal)
+    return principal
+
+
+def cli() -> None:
+    """CLI entry point."""
+
+    parser = argparse.ArgumentParser(description="Back-test LST routing strategy")
+    parser.add_argument("--start", type=int, required=True, help="start block")
+    parser.add_argument("--end", type=int, required=True, help="end block")
+    parser.add_argument("--interval", type=int, default=2000, help="block interval")
+    parser.add_argument(
+        "--initial", type=float, default=1000.0, help="initial BERA balance"
+    )
+    parser.add_argument("--csv", type=Path, help="output CSV path")
+    parser.add_argument("--vault", help="RewardVault address override")
+    parser.add_argument("-v", "--verbose", action="store_true", help="verbose log")
+    args = parser.parse_args()
+
+    setup_logger(args.verbose)
+
+    if args.vault:
+        config.REWARD_VAULT_ADDRESS = args.vault
+
+    # Use token addresses from config.LST_TOKENS
+    lst_tokens = [tok["address"] for tok in config.LST_TOKENS]
+
+    run_backtest(
+        lst_tokens=lst_tokens,
+        start_block=args.start,
+        end_block=args.end,
+        interval=args.interval,
+        initial_bera=args.initial,
+        csv_path=args.csv,
+    )
+
+
+if __name__ == "__main__":
+    cli()
+</file>
+
+<file path="blockchain_reader.py">
+import json
+import requests
+from typing import Any, Dict, List, Optional, Union
+from web3 import Web3
+from web3.exceptions import ContractLogicError
+import logging
+
+
+class AlchemyBlockReader:
+    """
+    Alchemy APIを使用して過去のブロックの状態を読み取るクラス
+    """
+
+    def __init__(self, api_key: str, network: str = "eth-mainnet"):
+        """
+        初期化メソッド
+
+        Args:
+            api_key: Alchemy API Key
+            network: ネットワーク名 (例: "eth-mainnet", "polygon-mainnet")
+        """
+        self.api_key = api_key
+        self.network = network
+        self.base_url = f"https://{network}.g.alchemy.com/v2/{api_key}"
+        self.web3 = Web3(Web3.HTTPProvider(self.base_url))
+
+    def get_contract(self, contract_address: str, abi: Union[str, List, Dict]) -> Any:
+        """
+        コントラクトインスタンスを取得
+
+        Args:
+            contract_address: コントラクトアドレス
+            abi: コントラクトのABI (JSON文字列、リスト、または辞書)
+
+        Returns:
+            Contract: コントラクトインスタンス
+        """
+        if isinstance(abi, str):
+            abi = json.loads(abi)
+
+        return self.web3.eth.contract(
+            address=self.web3.to_checksum_address(contract_address), abi=abi
+        )
+
+    def call_read_function(
+        self,
+        contract_address: str,
+        abi: Union[str, List, Dict],
+        function_name: str,
+        function_params: Optional[List] = None,
+        block_number: Optional[int] = None,
+        block_hash: Optional[str] = None,
+    ) -> Any:
+        """
+        読み取り関数の呼び出し
+
+        Args:
+            contract_address: コントラクトアドレス
+            abi: コントラクトのABI
+            function_name: 呼び出す関数名
+            function_params: 関数パラメータ (デフォルト: None)
+            block_number: 特定のブロック番号 (デフォルト: None)
+            block_hash: 特定のブロックハッシュ (デフォルト: None)
+
+        Returns:
+            Any: 関数の戻り値
+        """
+        if function_params is None:
+            function_params = []
+
+        contract = self.get_contract(contract_address, abi)
+        function = getattr(contract.functions, function_name)
+
+        # ブロック識別子を準備
+        block_identifier = "latest"
+        if block_number is not None:
+            block_identifier = block_number
+        elif block_hash is not None:
+            block_identifier = block_hash
+
+        try:
+            return function(*function_params).call(block_identifier=block_identifier)
+        except ContractLogicError as e:
+            print(f"コントラクト呼び出しエラー: {e}")
+            raise
+        except Exception as e:
+            print(f"エラー: {e}")
+            raise
+
+    def get_block_timestamp(self, block_number: int) -> int:
+        """
+        指定したブロック番号のタイムスタンプを取得
+
+        Args:
+            block_number: ブロック番号
+
+        Returns:
+            int: ブロックのタイムスタンプ（Unix時間）
+        """
+        block = self.web3.eth.get_block(block_number)
+        return block.timestamp
+
+    def get_latest_block_number(self) -> int:
+        """
+        最新のブロック番号を取得
+
+        Returns:
+            int: 最新のブロック番号
+        """
+        return self.web3.eth.block_number
+
+    # ------------------------------------------------------------------
+    # Batch utilities
+    # ------------------------------------------------------------------
+
+    def batch_call_read_function(
+        self, calls: List[Dict], block_number: Optional[int] = None
+    ):
+        """Perform multiple eth_call requests in a single JSON-RPC batch.
+
+        Parameters
+        ----------
+        calls : List[Dict]
+            Each dict must contain:
+              - contract_address (str)
+              - abi (list | dict | str)
+              - function_name (str)
+              - function_params (List)  optional
+        block_number : Optional[int]
+            Block number for all calls (defaults to latest if None)
+
+        Returns
+        -------
+        List[Any]
+            Decoded return values for each call in the same order as requests.
+        """
+
+        if block_number is None:
+            block_tag = "latest"
+        else:
+            block_tag = hex(block_number)
+
+        batch_payload = []
+        decoders = []  # store (id, decode_fn)
+
+        for idx, item in enumerate(calls):
+            contract_address = item["contract_address"]
+            abi = item["abi"]
+            fname = item["function_name"]
+            fparams = item.get("function_params", []) or []
+
+            contract = self.get_contract(contract_address, abi)
+            fn_obj = getattr(contract.functions, fname)(*fparams)
+
+            # encode call data (use build_transaction for compatibility with Web3 v6+)
+            try:
+                data = fn_obj.build_transaction({"gas": 0})["data"]
+            except Exception:
+                # Fallback for older Web3 versions
+                data = fn_obj._encode_transaction_data()
+
+            batch_payload.append(
+                {
+                    "jsonrpc": "2.0",
+                    "id": idx,
+                    "method": "eth_call",
+                    "params": [
+                        {"to": contract_address, "data": data},
+                        block_tag,
+                    ],
+                }
+            )
+
+            # Capture decode routine
+            def _simplify(v):
+                # Return single value if result is a 1-element tuple
+                return v[0] if isinstance(v, (list, tuple)) and len(v) == 1 else v
+
+            def _decoder(hex_data, fn=fn_obj, codec=self.web3.codec):
+                if hex_data is None:
+                    return None
+
+                # -- A. First try decode_output if available (Web3 v5) --
+                if hasattr(fn, "decode_output"):
+                    try:
+                        decoded = fn.decode_output(hex_data)
+                    except Exception:
+                        pass
+                    else:
+                        return _simplify(decoded)
+
+                # -- B. Fallback to manual decoding --
+                bin_data = Web3.to_bytes(hexstr=hex_data)
+                output_types = [o["type"] for o in fn.abi.get("outputs", [])]
+
+                # Handle both Web3 v5 and v6
+                if hasattr(codec, "decode_abi"):
+                    decoded = codec.decode_abi(output_types, bin_data)  # v5
+                else:
+                    decoded = codec.decode(output_types, bin_data)  # v6
+
+                return _simplify(decoded)
+
+            decoders.append(_decoder)
+
+        # Send batch request using requests to bypass Web3 missing batch helper
+        try:
+            response = requests.post(self.base_url, json=batch_payload)
+            response.raise_for_status()
+            data = response.json()
+        except Exception as e:
+            raise RuntimeError(f"Batch RPC call failed: {e}")
+
+        # Map id -> result
+        id_map = {item["id"]: item for item in data}
+
+        results = []
+        for idx, decoder in enumerate(decoders):
+            item = id_map.get(idx)
+
+            # Handle missing or error cases
+            if item is None:
+                logging.error(f"Batch RPC: missing response for id {idx}")
+                results.append(None)
+                continue
+
+            if "error" in item:
+                logging.error(
+                    f"Batch RPC error id {idx}: {item['error']}"  # type: ignore
+                )
+                raise RuntimeError(f"Batch RPC error: {item['error']}")
+
+            if "result" not in item:
+                logging.error(f"Batch RPC: no result field for id {idx}")
+                results.append(None)
+                continue
+
+            results.append(decoder(item["result"]))
+
+        return results
+
+
+# === Utility Function =========================================================
+
+
+def get_block_timestamp(block_number: int) -> int:
+    """Return block timestamp (unix seconds) for the specified block on the configured network."""
+    import config  # local import to avoid circular dependency at top level
+
+    reader = AlchemyBlockReader(config.ALCHEMY_API_KEY, network=config.NETWORK)
+    return reader.get_block_timestamp(block_number)
+</file>
+
+<file path="calculate_lp_value.py">
+from blockchain_reader import AlchemyBlockReader
+import requests
+from web3 import Web3
+import abi.KodiakIslandWithRouter as kodiak_island
+import abi.ERC20 as erc20
+import config
+import logging
+
+
+class LPValueCalculator:
+    """
+    LPトークンのBera建て価格を計算するクラス
+    """
+
+    def __init__(self, api_key, network=config.NETWORK):
+        """
+        初期化
+        api_key: AlchemyのAPIキー
+        network: 対象ネットワーク
+        """
+        self.reader = AlchemyBlockReader(api_key, network=network)
+        self.web3 = self.reader.web3
+        logging.debug(
+            f"LPValueCalculator initialized for network: {network}, Web3 connected: {self.web3.is_connected()}"
+        )
+
+    def get_pools_from_subgraph(
+        self, token0_address, token1_address, block_number: int | None = None
+    ):
+        """
+        サブグラフから2つのトークン間のプール情報を取得
+        """
+        # アドレスを小文字に変換
+        token0_address = token0_address.lower()
+        token1_address = token1_address.lower()
+
+        # 辞書順でtoken0とtoken1をソート
+        if token0_address > token1_address:
+            token0_address, token1_address = token1_address, token0_address
+
+        logging.debug(
+            f"Subgraph: Searching pool for token0={token0_address}, token1={token1_address}, block: {block_number}"
+        )
+
+        query = """
+        query GetPoolsByTokens($token0: String!, $token1: String!, $block: Block_height) {
+          pools(where: {
+            token0: $token0,
+            token1: $token1,
+            liquidity_gt: "0"
+          }, orderBy: liquidity, orderDirection: desc, first: 1, block: $block) {
+            id
+            token0 {
+              id
+              symbol
+              decimals
+            }
+            token1 {
+              id
+              symbol
+              decimals
+            }
+            feeTier
+            liquidity
+            token0Price
+            token1Price
+            volumeToken0
+            volumeToken1
+            volumeUSD
+          }
+        }
+        """
+
+        variables = {"token0": token0_address, "token1": token1_address}
+
+        try:
+            response = requests.post(
+                config.GOLDSKY_ENDPOINT, json={"query": query, "variables": variables}
+            )
+            response.raise_for_status()
+            data = response.json()
+
+            if "data" in data and "pools" in data["data"]:
+                return data["data"]["pools"]
+            else:
+                logging.warning(
+                    f"Subgraph query for {token0_address}/{token1_address}@{block_number} returned no pool data or error: {data.get('errors')}"
+                )
+                return []
+        except requests.exceptions.RequestException as e:
+            logging.error(
+                f"Subgraph connection error for {token0_address}/{token1_address}@{block_number}: {e}",
+                exc_info=True,
+            )
+            return []
+        except Exception as e:  # Catch other potential errors like JSONDecodeError
+            logging.error(
+                f"Error processing subgraph response for {token0_address}/{token1_address}@{block_number}: {e}",
+                exc_info=True,
+            )
+            return []
+
+    def get_token_price_in_bera(
+        self, token_address: str, block_number: int | None = None
+    ):
+        """
+        トークンのBera建て価格を取得
+        """
+        # アドレスを小文字に変換
+        token_address = token_address.lower()
+
+        # BERAの場合は価格 = 1
+        if token_address == config.BERA_ADDRESS:
+            return 1.0
+
+        # BERAとの直接プールから価格を取得
+        pools = self.get_pools_from_subgraph(
+            token_address, config.BERA_ADDRESS, block_number=block_number
+        )
+
+        if pools:
+            pool = pools[0]  # 最も流動性の高いプール
+
+            # トークンがtoken0かtoken1かを確認
+            is_token_token0 = pool["token0"]["id"].lower() == token_address
+
+            # 価格を取得
+            if is_token_token0:
+                price = float(pool["token1Price"])
+            else:
+                price = float(pool["token0Price"])
+
+            logging.debug(
+                f"Token {token_address} price (BERA) via direct pool: {price} at block {block_number}"
+            )
+            return price
+
+        # 価格が取得できない場合
+        logging.warning(
+            f"Could not get price for token {token_address} at block {block_number} via direct BERA pool."
+        )
+        return None
+
+    def get_token_pool_data(self, lp_address: str, block_number: int | None = None):
+        """
+        LPトークンからtoken0/token1アドレスと残高、総供給量を取得
+        """
+        try:
+            # KodiakIslandWithRouter ABIを使用して直接データを取得
+            lp_address = lp_address.lower()
+
+            # --- Batch RPC: token0, token1, balances, totalSupply ---
+            token0_address, token1_address, underlying_balances, total_supply = (
+                self.reader.batch_call_read_function(
+                    [
+                        {
+                            "contract_address": lp_address,
+                            "abi": kodiak_island.abi,
+                            "function_name": "token0",
+                            "function_params": [],
+                        },
+                        {
+                            "contract_address": lp_address,
+                            "abi": kodiak_island.abi,
+                            "function_name": "token1",
+                            "function_params": [],
+                        },
+                        {
+                            "contract_address": lp_address,
+                            "abi": kodiak_island.abi,
+                            "function_name": "getUnderlyingBalances",
+                            "function_params": [],
+                        },
+                        {
+                            "contract_address": lp_address,
+                            "abi": kodiak_island.abi,
+                            "function_name": "totalSupply",
+                            "function_params": [],
+                        },
+                    ],
+                    block_number=block_number,
+                )
+            )
+
+            token0_balance = underlying_balances[0]
+            token1_balance = underlying_balances[1]
+
+            # --- Batch decimals for token0 / token1 ---
+            try:
+                token0_decimals, token1_decimals = self.reader.batch_call_read_function(
+                    [
+                        {
+                            "contract_address": token0_address,
+                            "abi": erc20.abi,
+                            "function_name": "decimals",
+                            "function_params": [],
+                        },
+                        {
+                            "contract_address": token1_address,
+                            "abi": erc20.abi,
+                            "function_name": "decimals",
+                            "function_params": [],
+                        },
+                    ],
+                    block_number=block_number,
+                )
+            except Exception as e:
+                logging.warning(
+                    f"Could not get decimals for {token0_address} or {token1_address}, defaulting to 18. Error: {e}"
+                )
+                token0_decimals = 18
+                token1_decimals = 18
+
+            logging.debug(
+                f"LP Data ({lp_address}@{block_number}): T0={token0_address}, T1={token1_address}, Bal0={token0_balance}, Bal1={token1_balance}, Supply={total_supply}"
+            )
+
+            return {
+                "token0_address": token0_address,
+                "token1_address": token1_address,
+                "token0_balance": token0_balance,
+                "token1_balance": token1_balance,
+                "token0_decimals": token0_decimals,
+                "token1_decimals": token1_decimals,
+                "total_supply": total_supply,
+            }
+
+        except Exception as e:
+            logging.error(
+                f"Error getting pool data for {lp_address}@{block_number}: {e}",
+                exc_info=True,
+            )
+            import traceback
+
+            traceback.print_exc()
+            return None
+
+    def calculate_lp_value(self, lp_address: str, block_number: int | None = None):
+        """
+        LPトークンの情報と価値を計算する共通関数
+        """
+        try:
+            logging.debug(f"LP価値計算開始: {lp_address} at block {block_number}")
+            lp_address = lp_address.lower()
+
+            # トークンプールのデータを取得
+            pool_data = self.get_token_pool_data(lp_address, block_number=block_number)
+            if not pool_data:
+                raise Exception("プールデータを取得できませんでした")
+
+            token0_address = pool_data["token0_address"]
+            token1_address = pool_data["token1_address"]
+            token0_balance = pool_data["token0_balance"]
+            token1_balance = pool_data["token1_balance"]
+            token0_decimals = pool_data["token0_decimals"]
+            token1_decimals = pool_data["token1_decimals"]
+            total_supply = pool_data["total_supply"]
+
+            # トークンのBera建て価格を取得
+            token0_price = self.get_token_price_in_bera(
+                token0_address, block_number=block_number
+            )
+            token1_price = self.get_token_price_in_bera(
+                token1_address, block_number=block_number
+            )
+
+            # 小数点を考慮したトークン残高価値計算
+            token0_value_in_bera = (token0_balance * token0_price) / (
+                10**token0_decimals
+            )
+            token1_value_in_bera = (token1_balance * token1_price) / (
+                10**token1_decimals
+            )
+            if config.DEBUG:
+                print(f"DEBUG: token0_value_in_bera: {token0_value_in_bera}")
+                print(f"DEBUG: token1_value_in_bera: {token1_value_in_bera}")
+
+            # プール全体のBera建て価値
+            total_value_in_bera = token0_value_in_bera + token1_value_in_bera
+
+            # 1 LPトークンあたりの価値
+            lp_token_value_in_bera = (
+                total_value_in_bera * config.PRECISION / total_supply
+                if total_supply > 0
+                else 0
+            )
+
+            return {
+                "lp_address": lp_address,
+                "token0_address": token0_address,
+                "token1_address": token1_address,
+                "token0_balance": token0_balance,
+                "token1_balance": token1_balance,
+                "token0_decimals": token0_decimals,
+                "token1_decimals": token1_decimals,
+                "token0_price_in_bera": token0_price,
+                "token1_price_in_bera": token1_price,
+                "total_supply": total_supply,
+                "total_value_in_bera": total_value_in_bera,
+                "lp_token_value_in_bera": lp_token_value_in_bera,
+            }
+
+        except Exception as e:
+            logging.error(
+                f"LP価値計算エラー ({lp_address}@{block_number}): {e}", exc_info=True
+            )
+            import traceback
+
+            traceback.print_exc()
+            return None
+
+    def calculate_lp_value_in_bera(
+        self, lp_address: str, block_number: int | None = None
+    ):
+        """
+        LPトークンの1トークンあたりのBera建て価格を計算
+
+        Parameters:
+        lp_address (str): LPトークンのアドレス
+        block_number (int | None): Optional block number for historical calculation.
+
+        Returns:
+        float: 1 LPトークンあたりのBera建て価格
+        None: 計算エラー時
+        """
+        result = self.calculate_lp_value(lp_address, block_number=block_number)
+        if result:
+            return result["lp_token_value_in_bera"]
+        return None
+
+
+def test():
+    """
+    サンプル実行コード
+    """
+    logging.basicConfig(level=logging.DEBUG, format="[%(levelname)s] %(message)s")
+    calculator = LPValueCalculator(config.ALCHEMY_API_KEY)  # Uses config for network
+
+    # 各LPトークンの価値を計算
+    for lp_address in [config.LP_ADDRESS]:
+        print(f"\n===== {lp_address} の分析 =====")
+
+        # 詳細情報取得
+        lp_value = calculator.calculate_lp_value(lp_address)
+        if lp_value:
+            print(f"LP トークン: {lp_value['lp_address']}")
+            print(f"token0: {lp_value['token0_address']}")
+            print(f"token0 残高: {lp_value['token0_balance']}")
+            print(f"token0 価格 (BERA): {lp_value['token0_price_in_bera']}")
+            print(f"token1: {lp_value['token1_address']}")
+            print(f"token1 残高: {lp_value['token1_balance']}")
+            print(f"token1 価格 (BERA): {lp_value['token1_price_in_bera']}")
+            print(f"総供給量: {lp_value['total_supply']}")
+            print(f"プール総価値 (BERA): {lp_value['total_value_in_bera']}")
+            print(
+                f"1 LPトークンあたりの価値 (BERA): {lp_value['lp_token_value_in_bera']}"
+            )
+        else:
+            print(f"LP価値の計算に失敗しました: {lp_address}")
+
+        # 個別関数利用例
+        print("\n簡易関数使用例:")
+        bera_value = calculator.calculate_lp_value_in_bera(lp_address)
+        print(f"1 LPトークンあたりの価値 (BERA): {bera_value}")
+
+
+if __name__ == "__main__":
+    test()
+</file>
+
+<file path="config.py">
+"""
+Berachain上のトークン価値計算やリワード計算に使用する設定ファイル
+"""
+
+# 対象LPトークンアドレス
+LP_ADDRESS = "0x564f011D557aAd1cA09BFC956Eb8a17C35d490e0"
+
+# 対象RewardVaultアドレス
+REWARD_VAULT_ADDRESS = "0x3Be1bE98eFAcA8c1Eb786Cbf38234c84B5052EeB"
+
+# Alchemy API設定
+ALCHEMY_API_KEY = "BJ1wftWaii4yHmdwDFvopPh4SytJWLR0"
+NETWORK = "berachain-mainnet"
+
+# トークンアドレス
+BERA_ADDRESS = "0x6969696969696969696969696969696969696969"  # BERAトークンアドレス
+HONEY_ADDRESS = "0xfcbd14dc51f0a4d49d5e53c2e0950e0bc26d0dce"  # HONEYトークン
+
+# LSTトークンアドレス一覧
+LST_TOKENS = [
+    {"symbol": "iBGT", "address": "0xac03caba51e17c86c921e1f6cbfbdc91f8bb2e6b"},
+    {"symbol": "LBGT", "address": "0xbaadcc2962417c01af99fb2b7c75706b9bd6babe"},
+    {"symbol": "yBGT", "address": "0x7e768f47dfdd5dae874aac233f1bc5817137e453"},
+]
+
+
+# Goldskyサブグラフエンドポイント
+GOLDSKY_ENDPOINT = "https://api.goldsky.com/api/public/project_clpx84oel0al201r78jsl0r3i/subgraphs/kodiak-v3-berachain-mainnet/latest/gn"
+
+# 数値計算設定
+PRECISION = 10**18  # トークン数やLPトークンの標準精度
+PRECISION_E36 = 10**36  # rewardRateの精度
+
+# 時間設定
+SECONDS_PER_DAY = 86400
+DAYS_PER_YEAR = 365
+
+# デバッグ設定
+DEBUG = False
+</file>
+
+<file path="lst_price_tracker.py">
+import requests
+import argparse
+from datetime import datetime
+from web3 import Web3
+from blockchain_reader import AlchemyBlockReader
+import config
+import logging
+
+
+class LSTTokenPriceTracker:
+    """
+    LSTトークンの過去の価格を取得するクラス
+    """
+
+    def __init__(self, api_key, network=config.NETWORK):
+        """
+        初期化
+        api_key: AlchemyのAPIキー
+        network: 対象ネットワーク
+        """
+        self.reader = AlchemyBlockReader(api_key, network=network)
+        self.web3 = self.reader.web3
+        logging.debug(
+            f"LSTTokenPriceTracker initialized for network: {network}, Web3 connected: {self.web3.is_connected()}"
+        )
+
+        # BERAアドレスを保存（クエリで頻繁に使用）
+        self.bera_address = config.BERA_ADDRESS.lower()
+
+    def get_pools_from_subgraph(self, token_address, reference_block=None):
+        """
+        サブグラフからトークンとBERAのプール情報を取得
+
+        Parameters:
+        token_address (str): 対象トークンのアドレス
+        reference_block (int, optional): 参照するブロック番号、Noneの場合は最新
+
+        Returns:
+        list: プール情報のリスト
+        """
+        # アドレスを小文字に変換
+        token_address = token_address.lower()
+
+        # 辞書順でtoken0とtoken1をソート
+        token0 = token_address
+        token1 = self.bera_address
+
+        if token0 > token1:
+            token0, token1 = token1, token0
+
+        logging.debug(
+            f"Subgraph: Searching LST pool for token0={token0}, token1={token1}, block: {reference_block}"
+        )
+
+        # GraphQLクエリの構築
+        query = """
+        query GetPools($token0: String!, $token1: String!, $block: Block_height) {
+          pools(
+            where: {
+              token0: $token0,
+              token1: $token1,
+              liquidity_gt: "0"
+            },
+            orderBy: liquidity,
+            orderDirection: desc,
+            first: 1,
+            block: $block
+          ) {
+            id
+            token0 {
+              id
+              symbol
+              decimals
+            }
+            token1 {
+              id
+              symbol
+              decimals
+            }
+            feeTier
+            liquidity
+            sqrtPrice
+            tick
+            token0Price
+            token1Price
+            totalValueLockedToken0
+            totalValueLockedToken1
+          }
+        }
+        """
+
+        # 変数を設定
+        variables = {
+            "token0": token0,
+            "token1": token1,
+        }
+
+        # ブロック番号が指定されている場合
+        if reference_block:
+            variables["block"] = {"number": reference_block}
+
+        # リクエストを送信
+        try:
+            response = requests.post(
+                config.GOLDSKY_ENDPOINT, json={"query": query, "variables": variables}
+            )
+            response.raise_for_status()  # Raise HTTPError for bad responses (4xx or 5xx)
+            data = response.json()
+
+            if (
+                "data" in data
+                and "pools" in data["data"]
+                and len(data["data"]["pools"]) > 0
+            ):
+                return data["data"]["pools"]
+            else:
+                logging.warning(
+                    f"Subgraph query for LST {token_address}@{reference_block} returned no pool data or error: {data.get('errors')}"
+                )
+                return []
+        except requests.exceptions.RequestException as e:
+            logging.error(
+                f"Subgraph connection error for LST {token_address}@{reference_block}: {e}",
+                exc_info=True,
+            )
+            return []
+        except Exception as e:  # Catch other potential errors like JSONDecodeError
+            logging.error(
+                f"Error processing subgraph response for LST {token_address}@{reference_block}: {e}",
+                exc_info=True,
+            )
+            return []
+
+    def get_token_price_at_block(self, token_address, token_symbol, block_number=None):
+        """
+        指定ブロックでのトークン価格を取得
+
+        Parameters:
+        token_address (str): トークンのアドレス
+        token_symbol (str): トークンのシンボル
+        block_number (int, optional): ブロック番号、Noneの場合は最新
+
+        Returns:
+        dict: 価格情報
+        """
+        # トークンアドレスを正規化
+        token_address = token_address.lower()
+
+        # BERA自体の場合は価格=1を返す
+        if token_address == self.bera_address:
+            price_info = {
+                "symbol": "BERA",
+                "address": token_address,
+                "price_in_bera": 1.0,
+                "block_number": block_number or self.reader.get_latest_block_number(),
+                "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                "pool_id": None,
+                "liquidity": 0,
+            }
+            return price_info
+
+        # BERAとのプールを検索
+        pools = self.get_pools_from_subgraph(token_address, block_number)
+
+        if not pools:
+            logging.warning(
+                f"Price data not found for {token_symbol} ({token_address}) at block {block_number}"
+            )
+            return None
+
+        pool = pools[0]  # 最も流動性の高いプール
+
+        # トークンがtoken0かtoken1かを確認
+        is_token_token0 = pool["token0"]["id"].lower() == token_address
+        is_bera_token0 = pool["token0"]["id"].lower() == self.bera_address
+
+        # 価格と流動性を取得
+        if is_token_token0:
+            # トークンがtoken0の場合、BERAはtoken1
+            # token0Price は "token0 per token1" なので 1 token0 の BERA 建て価格は 1 / token0Price
+            price_in_bera = 1.0 / float(pool["token0Price"])
+        else:
+            # トークンがtoken1の場合、BERAはtoken0
+            # token1Price は "token1 per token0" なので 1 token1 の BERA 建て価格は 1 / token1Price
+            price_in_bera = 1.0 / float(pool["token1Price"])
+
+        # 現在のブロック番号とタイムスタンプを取得
+        if block_number is None:
+            block_number = self.reader.get_latest_block_number()
+            timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        else:
+            block = self.reader.web3.eth.get_block(block_number)
+            timestamp = datetime.fromtimestamp(block.timestamp).strftime(
+                "%Y-%m-%d %H:%M:%S"
+            )
+
+        # 結果を整形
+        price_info = {
+            "symbol": token_symbol,
+            "address": token_address,
+            "price_in_bera": price_in_bera,
+            "block_number": block_number,
+            "timestamp": timestamp,
+            "pool_id": pool["id"],
+            "liquidity": float(pool["liquidity"]),
+            "total_value_locked_token0": float(pool["totalValueLockedToken0"]),
+            "total_value_locked_token1": float(pool["totalValueLockedToken1"]),
+        }
+
+        return price_info
+
+    def get_all_lst_prices_at_block(self, block_number=None):
+        """
+        全LSTトークンの価格を指定ブロックで取得
+
+        Parameters:
+        block_number (int, optional): ブロック番号、Noneの場合は最新
+
+        Returns:
+        list: 各LSTの価格情報リスト
+        """
+        # ----- Optimized batch fetch via GraphQL alias query -----
+        results = []
+
+        # Determine reference block
+        if block_number is None:
+            block_number = self.reader.get_latest_block_number()
+            logging.debug(
+                f"[Batch] Fetching all LST prices for latest block: {block_number}"
+            )
+        else:
+            logging.debug(f"[Batch] Fetching all LST prices for block: {block_number}")
+
+        # Build alias-based GraphQL query parts
+        query_parts = []
+        aliases = []  # Keep mapping alias -> token dict
+        for idx, lst in enumerate(config.LST_TOKENS):
+            token_address = lst["address"].lower()
+            token_symbol = lst["symbol"]
+
+            token0 = token_address
+            token1 = self.bera_address
+            if token0 > token1:
+                token0, token1 = token1, token0
+
+            alias = f"t{idx}"
+            aliases.append((alias, lst))
+
+            part = f"""
+      {alias}: pools(where: {{token0: \"{token0}\", token1: \"{token1}\", liquidity_gt: \"0\"}}, orderBy: liquidity, orderDirection: desc, first: 1, block: {{number: $block}}) {{
+        id
+        token0 {{ id }}
+        token1 {{ id }}
+        token0Price
+        token1Price
+        liquidity
+        totalValueLockedToken0
+        totalValueLockedToken1
+      }}"""
+            query_parts.append(part)
+
+        # Assemble full query
+        query_body = "query AllPools($block: Int!) {\n" + "\n".join(query_parts) + "\n}"
+
+        variables = {"block": block_number}
+
+        try:
+            response = requests.post(
+                config.GOLDSKY_ENDPOINT,
+                json={"query": query_body, "variables": variables},
+            )
+            response.raise_for_status()
+            data = response.json()
+
+            if "data" not in data:
+                logging.warning(
+                    f"Batch subgraph query returned error: {data.get('errors')}"
+                )
+                return results
+
+            pool_data_map = data["data"]
+
+            for alias, lst in aliases:
+                token_address = lst["address"].lower()
+                token_symbol = lst["symbol"]
+
+                pools = pool_data_map.get(alias)
+                if not pools:
+                    logging.warning(
+                        f"Pool not found for {token_symbol} ({token_address}) at block {block_number}"
+                    )
+                    continue
+
+                pool = pools[0]
+
+                is_token_token0 = pool["token0"]["id"].lower() == token_address
+
+                # Compute price in BERA (inverse of *Price fields).
+                if is_token_token0:
+                    price_in_bera = 1.0 / float(pool["token0Price"])
+                else:
+                    price_in_bera = 1.0 / float(pool["token1Price"])
+
+                price_info = {
+                    "symbol": token_symbol,
+                    "address": token_address,
+                    "price_in_bera": price_in_bera,
+                    "block_number": block_number,
+                    "timestamp": datetime.fromtimestamp(  # type: ignore
+                        self.reader.web3.eth.get_block(block_number).timestamp
+                    ).strftime("%Y-%m-%d %H:%M:%S"),
+                    "pool_id": pool["id"],
+                    "liquidity": float(pool["liquidity"]),
+                    "total_value_locked_token0": float(pool["totalValueLockedToken0"]),
+                    "total_value_locked_token1": float(pool["totalValueLockedToken1"]),
+                }
+
+                results.append(price_info)
+
+                logging.debug(
+                    f"[Batch] LST Price: {token_symbol}: {price_in_bera} BERA at block {block_number}"
+                )
+
+        except requests.exceptions.RequestException as e:
+            logging.error(
+                f"Batch subgraph connection error @ {block_number}: {e}", exc_info=True
+            )
+        except Exception as e:
+            logging.error(
+                f"Error processing batch subgraph response @ {block_number}: {e}",
+                exc_info=True,
+            )
+
+        return results
+
+    def track_lst_prices_in_range(self, start_block, end_block, step=10000):
+        """
+        特定ブロック範囲の間でLSTトークン価格を追跡
+
+        Parameters:
+        start_block (int): 開始ブロック番号
+        end_block (int): 終了ブロック番号
+        step (int): ブロック間隔
+
+        Returns:
+        dict: トークンごとのブロック価格履歴
+        """
+        # 最新ブロックを超えないように調整
+        latest_block = self.reader.get_latest_block_number()
+        if end_block > latest_block:
+            end_block = latest_block
+            logging.info(
+                f"Adjusted end block for LST price tracking to latest available: {latest_block}"
+            )
+
+        # 結果格納用
+        price_history = {lst["symbol"]: [] for lst in config.LST_TOKENS}
+
+        # 指定範囲のブロックを処理
+        for block in range(start_block, end_block + 1, step):
+            logging.debug(f"--- Tracking LST prices for block {block} ---")
+
+            # このブロックでの全LSTの価格を取得
+            lst_prices = self.get_all_lst_prices_at_block(block)
+
+            # 結果を各トークンの履歴に追加
+            for price_info in lst_prices:
+                symbol = price_info["symbol"]
+                price_history[symbol].append(price_info)
+
+        return price_history
+
+
+def test():
+    # コマンドライン引数の解析
+    parser = argparse.ArgumentParser(description="LSTトークンの価格履歴を追跡します")
+    parser.add_argument("--block", type=int, help="価格を取得するブロック番号")
+    parser.add_argument(
+        "--range", type=int, nargs=2, help="価格を取得するブロック範囲 (開始 終了)"
+    )
+    parser.add_argument(
+        "--step",
+        type=int,
+        default=10000,
+        help="ブロック範囲での取得間隔 (デフォルト: 10000)",
+    )
+    args = parser.parse_args()
+
+    # トラッカーのインスタンスを作成
+    tracker = LSTTokenPriceTracker(config.ALCHEMY_API_KEY)
+
+    # 現在のブロック番号を取得
+    current_block = tracker.reader.get_latest_block_number()
+
+    # 範囲指定がある場合
+    if args.range:
+        start_block, end_block = args.range
+        if end_block > current_block:
+            end_block = current_block
+
+        logging.info(
+            f"ブロック {start_block} から {end_block} までの価格履歴を取得（ステップ {args.step}）"
+        )
+        price_history = tracker.track_lst_prices_in_range(
+            start_block, end_block, args.step
+        )
+
+        # 結果のサマリーを表示
+        logging.info("\n===== LSTトークン価格履歴 =====")
+        for symbol, history in price_history.items():
+            if history:
+                logging.info(f"\n{symbol} 価格推移:")
+                logging.info("ブロック, タイムスタンプ, 価格(BERA)")
+                for entry in history:
+                    logging.info(
+                        f"{entry['block_number']}, {entry['timestamp']}, {entry['price_in_bera']:.8f}"
+                    )
+            else:
+                logging.info(f"\n{symbol}: データなし")
+
+    # 特定のブロック番号が指定されている場合
+    elif args.block:
+        if args.block > current_block:
+            logging.warning(
+                f"指定されたブロック {args.block} は現在のブロック {current_block} より大きいため、現在のブロックを使用します"
+            )
+            args.block = current_block
+
+        logging.info(f"ブロック {args.block} での価格を取得")
+        lst_prices = tracker.get_all_lst_prices_at_block(args.block)
+
+        # 詳細な結果表示
+        logging.info("\n===== LSTトークン価格詳細 =====")
+        for price_info in lst_prices:
+            logging.info(f"\n{price_info['symbol']} ({price_info['address']}):")
+            logging.info(f"  ブロック番号: {price_info['block_number']}")
+            logging.info(f"  タイムスタンプ: {price_info['timestamp']}")
+            logging.info(f"  価格(BERA): {price_info['price_in_bera']:.8f}")
+            logging.info(f"  プールID: {price_info['pool_id']}")
+            logging.info(f"  流動性: {price_info['liquidity']}")
+            logging.info(f"  Token0ロック量: {price_info['total_value_locked_token0']}")
+            logging.info(f"  Token1ロック量: {price_info['total_value_locked_token1']}")
+
+    # 指定がない場合は最新ブロックで価格を取得
+    else:
+        logging.info("最新ブロックでの価格を取得")
+        lst_prices = tracker.get_all_lst_prices_at_block()
+
+        # 結果のサマリーを表示
+        logging.info("\n===== 現在のLSTトークン価格 =====")
+        for price_info in lst_prices:
+            logging.info(
+                f"{price_info['symbol']}: {price_info['price_in_bera']:.8f} BERA"
+            )
+
+
+# === Utility Function =========================================================
+
+
+def get_lst_prices_at_block(lst_tokens, block_number):
+    """Return dict {token_address: price_in_bera} for given block.
+    lst_tokens: iterable of token addresses (str)
+    """
+    import config  # local import
+
+    tracker = LSTTokenPriceTracker(config.ALCHEMY_API_KEY, network=config.NETWORK)
+    prices = {}
+    for addr in lst_tokens:
+        try:
+            info = tracker.get_token_price_at_block(addr, addr, block_number)
+            if info and info.get("price_in_bera") is not None:
+                prices[addr] = info["price_in_bera"]
+        except Exception as e:
+            print(f"価格取得エラー ({addr}@{block_number}): {e}")
+    return prices
+
+
+if __name__ == "__main__":
+    test()
+</file>
+
+<file path="read_reward_vault.py">
+from __future__ import annotations
+
+import logging
+from blockchain_reader import AlchemyBlockReader
+from web3 import Web3
+from abi.RewardVault import abi as reward_vault_abi
+import abi.ERC20 as erc20
+from calculate_lp_value import LPValueCalculator
+import config
+import argparse
+from datetime import datetime
+import requests
+import time
+from typing import Any, Dict
+
+
+class RewardVaultAnalyzer:
+    """
+    Analyzes RewardVault APR and related LP token values for a specific vault.
+    """
+
+    def __init__(
+        self,
+        api_key: str,
+        network: str,
+        vault_address: str,
+        lp_token_address: str,  # LP token associated with this vault
+    ):
+        """
+        Initializes the analyzer for a specific reward vault.
+
+        Parameters
+        ----------
+        api_key : str
+            Alchemy API key.
+        network : str
+            Blockchain network (e.g., 'berachain-mainnet').
+        vault_address : str
+            The address of the RewardVault contract.
+        lp_token_address : str
+            The address of the LP token staked in the vault.
+        """
+        self.reader = AlchemyBlockReader(api_key, network=network)
+        self.lp_calculator = LPValueCalculator(api_key, network=network)
+        self.vault_address = vault_address
+        self.lp_token_address = (
+            lp_token_address  # Store the specific LP token for this vault
+        )
+
+    def _get_block_timestamp(self, block_number: int) -> datetime:
+        """Gets timestamp for a block number using the internal reader."""
+        block = self.reader.web3.eth.get_block(block_number)
+        return datetime.fromtimestamp(block.timestamp)
+
+    def _get_pool_data_at_block(self, block_number: int) -> Dict[str, Any] | None:
+        """
+        Fetches pool data for BERA/HONEY from subgraph at a specific block.
+        Note: This is specific to LP_ADDRESS for now.
+        If the vault is for a different LP, this needs generalization or removal if LP value is fetched differently.
+        """
+        token0 = config.BERA_ADDRESS.lower()
+        token1 = (
+            config.HONEY_ADDRESS.lower()
+        )  # Assuming BERA/HONEY for LP value context
+
+        if token0 > token1:
+            token0, token1 = token1, token0
+
+        logging.debug(
+            f"Subgraph: Querying BERA/HONEY pool at block {block_number} for {self.lp_token_address}"
+        )
+
+        query = """
+        query GetPoolDataAtBlock($blockNumber: Int!, $token0: String!, $token1: String!) {
+          pools(
+            where: {token0: $token0, token1: $token1, liquidity_gt: "0"},
+            orderBy: liquidity, orderDirection: desc, first: 1,
+            block: {number: $blockNumber}
+          ) {
+            id token0 { id symbol decimals } token1 { id symbol decimals }
+            feeTier liquidity sqrtPrice tick token0Price token1Price
+            totalValueLockedToken0 totalValueLockedToken1
+          }
+        }
+        """
+        variables = {"blockNumber": block_number, "token0": token0, "token1": token1}
+        max_retries = 3
+        retry_delay = 2
+
+        for attempt in range(max_retries):
+            try:
+                response = requests.post(
+                    config.GOLDSKY_ENDPOINT,
+                    json={"query": query, "variables": variables},
+                )
+                response.raise_for_status()
+                data = response.json()
+                if (
+                    data.get("data")
+                    and data["data"].get("pools")
+                    and len(data["data"]["pools"]) > 0
+                ):
+                    logging.debug(
+                        f"Subgraph: Pool data success {data['data']['pools'][0]['id']}"
+                    )
+                    return data["data"]["pools"][0]
+                logging.warning(
+                    f"Subgraph query for {self.lp_token_address}@{block_number} returned no pool data or error: {data.get('errors')}"
+                )
+                if attempt < max_retries - 1:
+                    time.sleep(retry_delay)
+            except requests.exceptions.RequestException as e:
+                logging.error(
+                    f"Subgraph connection error for {self.lp_token_address}@{block_number}: {e}",
+                    exc_info=True,
+                )
+                if attempt < max_retries - 1:
+                    time.sleep(retry_delay)
+            except Exception as e:
+                logging.error(
+                    f"Error processing subgraph response for {self.lp_token_address}@{block_number}: {e}",
+                    exc_info=True,
+                )
+                if attempt < max_retries - 1:
+                    time.sleep(retry_delay)
+        return None
+
+    def _calculate_lp_token_value_bera_at_block(self, block_number: int) -> float:
+        """
+        Calculates the BERA value of 1 LP token (self.lp_token_address)
+        staked in THIS vault (self.vault_address) at a specific block.
+        """
+        try:
+            # LPValueCalculator is now block-aware.
+            lp_value_bera = self.lp_calculator.calculate_lp_value_in_bera(
+                self.lp_token_address, block_number=block_number
+            )
+            if lp_value_bera is not None:
+                return lp_value_bera
+            logging.warning(
+                f"Could not determine LP value for {self.lp_token_address} at block {block_number}"
+            )
+            return 0.0  # Default if LP value cannot be determined
+        except Exception as e:
+            logging.error(
+                f"Error calculating LP value for {self.lp_token_address} at block {block_number}: {e}",
+                exc_info=True,
+            )
+            return 0.0
+
+    def get_apr_details_at_block(
+        self, block_number: int | None = None
+    ) -> Dict[str, Any]:
+        """
+        Calculates APR details for the vault at a specific block.
+        Returns a dictionary containing APR and related metrics.
+        """
+        if block_number is None:
+            block_number = self.reader.get_latest_block_number()
+
+        block_ts = self._get_block_timestamp(block_number)
+
+        logging.debug(
+            f"APR Calc: Block {block_number} ({block_ts.strftime('%Y-%m-%d %H:%M:%S')}) for vault {self.vault_address}"
+        )
+
+        # Batch fetch rewardRate and totalSupply in a single RPC call
+        reward_rate_raw, total_supply_staked_raw = self.reader.batch_call_read_function(
+            [
+                {
+                    "contract_address": self.vault_address,
+                    "abi": reward_vault_abi,
+                    "function_name": "rewardRate",
+                    "function_params": [],
+                },
+                {
+                    "contract_address": self.vault_address,
+                    "abi": reward_vault_abi,
+                    "function_name": "totalSupply",
+                    "function_params": [],
+                },
+            ],
+            block_number=block_number,
+        )
+
+        reward_per_second = reward_rate_raw / config.PRECISION_E36
+
+        total_supply_staked_adjusted = total_supply_staked_raw / config.PRECISION
+
+        logging.debug(
+            f"Vault Info: Address={self.vault_address}, RewardRate={reward_per_second:.8f} BGT/sec, StakedLP={total_supply_staked_adjusted:.4f}"
+        )
+
+        # Use the new method for LP token value
+        lp_token_value_bera = self._calculate_lp_token_value_bera_at_block(block_number)
+
+        logging.debug(
+            f"LP Token Info: Address={self.lp_token_address}, ValueInBERA={lp_token_value_bera:.8f} at block {block_number}"
+        )
+
+        # APR Calculation (moved from standalone calculate_apr)
+        annual_reward_bgt = (
+            reward_per_second * config.SECONDS_PER_DAY * config.DAYS_PER_YEAR
+        )
+        total_staked_value_bera = total_supply_staked_adjusted * lp_token_value_bera
+
+        apr_percentage = 0.0
+        if total_staked_value_bera > 0:
+            apr_percentage = (annual_reward_bgt / total_staked_value_bera) * 100
+
+        reward_per_day = reward_per_second * config.SECONDS_PER_DAY
+        logging.debug(
+            f"Reward Info: Daily={reward_per_day:.2f} BGT, Annual={annual_reward_bgt:.2f} BGT"
+        )
+        logging.debug(f"Stake Value: Total={total_staked_value_bera:.2f} BERA")
+        logging.debug(
+            f"Calculated APR for vault {self.vault_address}: {apr_percentage:.2f}%"
+        )
+
+        return {
+            "block_number": block_number,
+            "timestamp": block_ts,
+            "reward_rate_raw": reward_rate_raw,
+            "total_supply_staked_raw": total_supply_staked_raw,
+            "lp_token_value_bera": lp_token_value_bera,
+            "apr_percentage": apr_percentage,  # APR as percentage, e.g., 123.45
+        }
+
+
+# === Standalone Helper (for backward compatibility / external use if needed) ===
+# This will now use the class internally.
+def get_lp_apr_at_block(token_address: str, block_number: int) -> float:
+    """
+    Returns APR (as decimal, e.g., 0.15 for 15%) for the LP vault
+    associated with `token_address` at `block_number`.
+    Assumes `token_address` is the LP token address, and uses
+    `config.REWARD_VAULT_ADDRESS` as the vault for it.
+    This needs to be more flexible if there are multiple vaults.
+    For now, it uses the global REWARD_VAULT_ADDRESS.
+    """
+    # This part needs a way to map token_address (LP) to its specific vault
+    # or assume the global one is for this LP.
+    # If multiple vaults, backtest.py needs to pass the correct vault address.
+    vault_addr_for_lp = (
+        config.REWARD_VAULT_ADDRESS
+    )  # Assuming global vault is for this LP
+
+    try:
+        # Ensure API key and network are from config if not passed
+        analyzer = RewardVaultAnalyzer(
+            api_key=config.ALCHEMY_API_KEY,
+            network=config.NETWORK,
+            vault_address=vault_addr_for_lp,  # This should be the vault for 'token_address'
+            lp_token_address=token_address,  # Pass the LP token address
+        )
+        apr_details = analyzer.get_apr_details_at_block(block_number)
+        return apr_details["apr_percentage"] / 100.0
+    except Exception as e:
+        logging.error(
+            f"Error in get_lp_apr_at_block for {token_address}@{block_number}: {e}",
+            exc_info=True,
+        )
+        return 0.0
+
+
+# Keep main for direct script execution if needed, update to use the class.
+def main():
+    parser = argparse.ArgumentParser(description="Calculate APR for a RewardVault.")
+    parser.add_argument("--block", type=int, help="Block number to calculate APR at.")
+    parser.add_argument(
+        "--vault", default=config.REWARD_VAULT_ADDRESS, help="RewardVault address."
+    )
+    # Needs LP token address for the specified vault
+    parser.add_argument(
+        "--lp_token",
+        default=config.LP_ADDRESS,
+        help="LP Token address staked in the vault.",
+    )
+    args = parser.parse_args()
+
+    analyzer = RewardVaultAnalyzer(
+        api_key=config.ALCHEMY_API_KEY,
+        network=config.NETWORK,
+        vault_address=args.vault,
+        lp_token_address=args.lp_token,
+    )
+
+    apr_info = analyzer.get_apr_details_at_block(args.block)
+
+    print("\n===== APR Calculation Result =====")
+    print(f"Block: {apr_info['block_number']}")
+    print(f"Timestamp: {apr_info['timestamp'].strftime('%Y-%m-%d %H:%M:%S')}")
+    print(f"LP Token Value (BERA): {apr_info['lp_token_value_bera']:.8f}")
+    print(f"APR: {apr_info['apr_percentage']:.2f}%")
+    print("==================================")
+
+
+if __name__ == "__main__":
+    main()
+</file>
+
+</files>

@@ -1,0 +1,25 @@
+{
+  "pools": {
+    "iBGT": {
+      "pool_address": "0x12bf773f18cec56f14e7cb91d82984ef5a3148ee",
+      "token_address": "0xac03caba51e17c86c921e1f6cbfbdc91f8bb2e6b",
+      "updated_block": 5548600
+    },
+    "LBGT": {
+      "pool_address": "0xf6feb2c0ce85be768b380c96297bb49d42fe5670",
+      "token_address": "0xbaadcc2962417c01af99fb2b7c75706b9bd6babe",
+      "updated_block": 5548600
+    },
+    "yBGT": {
+      "pool_address": "0x990be3d7c937e4fc52d906a6435266c4e69101c4",
+      "token_address": "0x7e768f47dfdd5dae874aac233f1bc5817137e453",
+      "updated_block": 5548600
+    },
+    "stBGT": {
+      "pool_address": "0xa91576253fed7a4647c3c9638468c656d0fa6457",
+      "token_address": "0x2cec7f1ac87f5345ced3d6c74bbb61bfae231ffb",
+      "updated_block": 5548600
+    }
+  },
+  "last_update_block": 5548600
+}
