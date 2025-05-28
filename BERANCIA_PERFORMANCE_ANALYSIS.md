@@ -4,9 +4,31 @@
 
 **Berancia's auto routing strategy demonstrates superior performance**, achieving **893.3% ROI** over a 1-year simulation period, significantly outperforming all individual LST token strategies.
 
-## Performance Comparison
+## Historical Backtest Results (27 March ~ 27 May, 2025)
 
-### 1-Year Extended Simulation Results
+### Two-Month Performance Analysis
+
+**Real blockchain data analysis over 2 months shows Berancia's early advantage:**
+
+- **Berancia**: 46.28% ROI
+- **Best Individual (LBGT)**: 42.13% ROI
+- **Early advantage**: +4.15%
+
+![ROI Comparison Chart](plots/backtest_roi_comparison.png)
+_Figure 1: Two-month historical backtest showing Berancia's consistent outperformance_
+
+### Dynamic Routing in Action
+
+**Key Insight**: Berancia automatically switches between Liquid BGT to capture optimal opportunities, with **178 routing switches** detected during the simulation period of two months, demonstrating its ability to adapt to changing market conditions and identify the highest-yielding assets in real-time.
+
+![APR Yield Comparison Chart](plots/backtest_apr_yield_comparison.png)
+_Figure 2: APR × Price comparison with routing switch indicators (black dashed lines) showing Berancia's dynamic optimization_
+
+## Extended Simulation Results (1-Year Projection)
+
+### Long-Term Performance Advantage
+
+**When extended to 1-year using average APR values, the compounding advantage becomes exponential:**
 
 | Strategy                   | Final Position | ROI        | Advantage vs Berancia |
 | -------------------------- | -------------- | ---------- | --------------------- |
@@ -19,13 +41,14 @@
 - **1.19x** better than LBGT strategy
 - **1.31x** better than iBGT strategy
 
+![Extended Backtest ROI Comparison](plots/extended_backtest_roi_comparison.png)
+_Figure 3: 1-year extended simulation showing exponential growth advantages of Berancia's strategy_
+
 ## Why Berancia Outperforms
 
 ### 1. 🎯 **Intelligent Dynamic Routing**
 
 Berancia automatically routes capital to the **highest-apr Liquid BGT** at each decision point:
-
-**Key Insight**: Berancia automatically switches between Liquid BGT to capture optimal opportunities, with **178 routing switches** detected during the simulation period of two months, demonstrating its ability to adapt to changing market conditions and identify the highest-yielding assets in real-time.
 
 ### 2. ⚡ **Continuous Compounding Advantage**
 
@@ -41,7 +64,7 @@ Berancia automatically routes capital to the **highest-apr Liquid BGT** at each 
 - **Static Strategies**: Individual token strategies are locked into one asset regardless of market conditions
 - **Dynamic Strategy**: Berancia adapts in real-time, always selecting the optimal token based on current prices
 
-### 4. 🚀 **New LST Token Integration**
+### 4. 🚀 **New Liquid BGT Integration**
 
 **Critical Advantage**: Berancia's auto-routing strategy immediately responded to the launch of new Liquid BGT tokens during the simulation period, automatically incorporating yBGT into its routing decisions upon launch. This demonstrates a key competitive advantage:
 
@@ -72,20 +95,6 @@ For each time period:
 
 - **Berancia**: Revenue → Position every 10 minutes (144x daily frequency)
 - **Individual**: Revenue → Position every 24 hours (1x daily frequency)
-
-## ROI Breakdown
-
-### Original Historical Data (27 March ~ 27 May, 2025)
-
-- **Berancia**: 46.28% ROI
-- **Best Individual (LBGT)**: 42.13% ROI
-- **Advantage**: +4.15%
-
-### 1-Year Extended Simulation
-
-- **Berancia**: 893.3% ROI
-- **Best Individual (LBGT)**: 749.4% ROI
-- **Compounded advantage**: +143.9%
 
 ## Market Analysis
 
