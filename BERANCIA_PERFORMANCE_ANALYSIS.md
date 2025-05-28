@@ -2,7 +2,7 @@
 
 ## Executive Summary
 
-**Berancia's auto routing strategy demonstrates superior performance**, achieving **893.7% ROI** over a 1-year simulation period, significantly outperforming all individual LST token strategies.
+**Berancia's auto routing strategy demonstrates superior performance**, achieving **893.3% ROI** over a 1-year simulation period, significantly outperforming all individual LST token strategies.
 
 ## Performance Comparison
 
@@ -10,9 +10,9 @@
 
 | Strategy | Final Position | ROI | Advantage vs Berancia |
 |----------|----------------|-----|---------------------|
-| **🏆 Berancia (Auto)** | **993.72** | **893.7%** | **Baseline** |
-| LBGT (1d) | 849.40 | 749.4% | -144.3% |
-| iBGT (1d) | 784.69 | 684.7% | -209.0% |
+| **🏆 Berancia (Auto 10m)** | **993.29** | **893.3%** | **Baseline** |
+| LBGT (1d) | 849.40 | 749.4% | -143.9% |
+| iBGT (1d) | 784.69 | 684.7% | -208.6% |
 
 ### Performance Multipliers
 - **1.19x** better than LBGT strategy
@@ -24,27 +24,29 @@
 
 Berancia automatically routes capital to the **highest-priced LST token** at each decision point:
 
-| Token | Routing Frequency | Market Share |
-|-------|------------------|--------------|
-| yBGT | 11,970 times | 45.2% |
-| iBGT | 7,772 times | 29.3% |
-| LBGT | 6,749 times | 25.5% |
-
-**Key Insight**: Berancia captured the best opportunities across all tokens, with yBGT being the most frequently selected high-performer, demonstrating its ability to identify and capitalize on optimal yield opportunities.
+**Key Insight**: Berancia automatically switches between LST tokens to capture optimal opportunities, with **178 routing switches** detected during the simulation period, demonstrating its ability to adapt to changing market conditions and identify the highest-yielding assets in real-time.
 
 ### 2. ⚡ **Continuous Compounding Advantage**
 
 | Strategy Type | Compound Frequency | Advantage |
 |---------------|-------------------|-----------|
-| **Berancia (auto_0m)** | **Continuous (every ~3.17 minutes)** | **Maximum growth capture** |
+| **Berancia (auto_10m)** | **10-minute intervals** | **Frequent growth capture** |
 | Individual Strategies | Daily (24-hour intervals) | Limited growth capture |
 
-**Mathematical Impact**: Continuous compounding allows Berancia to capture and reinvest gains immediately, leading to exponential growth advantages over time.
+**Mathematical Impact**: 10-minute compounding allows Berancia to capture and reinvest gains 144 times more frequently than daily strategies, leading to significant growth advantages over time.
 
 ### 3. 📈 **Adaptive Market Response**
 
 - **Static Strategies**: Individual token strategies are locked into one asset regardless of market conditions
 - **Dynamic Strategy**: Berancia adapts in real-time, always selecting the optimal token based on current prices
+
+### 4. 🚀 **New LST Token Integration**
+
+**Critical Advantage**: Berancia's auto-routing strategy immediately responded to the launch of new Liquid BGT tokens during the simulation period, automatically incorporating yBGT into its routing decisions upon launch. This demonstrates a key competitive advantage:
+
+- **Future-Proof Strategy**: As new Liquid BGT tokens launch in the ecosystem, Berancia automatically includes them in optimization decisions
+- **Market Evolution Response**: While individual token strategies become obsolete as price competition drives convergence, auto-routing maintains maximum yield capture
+- **Compounding Effect**: The combination of optimal token selection AND frequent compounding creates exponential growth advantages over time
 
 ## Technical Implementation
 
@@ -58,7 +60,7 @@ For each time period:
 ```
 
 ### Compound Strategy Comparison
-- **Berancia**: Revenue → Position every ~197 seconds
+- **Berancia**: Revenue → Position every 10 minutes
 - **Individual**: Revenue → Position every 24 hours
 
 ## ROI Breakdown
@@ -69,32 +71,29 @@ For each time period:
 - **Early advantage**: +4.17%
 
 ### 1-Year Extended Simulation
-- **Berancia**: 893.7% ROI
+- **Berancia**: 893.3% ROI
 - **Best Individual (LBGT)**: 749.4% ROI
-- **Compounded advantage**: +144.3%
+- **Compounded advantage**: +143.9%
 
 ## Market Analysis
 
 ### Token Performance Insights
-Based on routing frequency analysis, the LST token market dynamics show:
+Based on the dynamic routing analysis, the LST token market shows significant volatility in optimal selection, with **178 routing switches** occurring during the simulation period. This demonstrates that no single token consistently maintains the highest yield, validating the value of dynamic allocation versus static positioning in any individual token strategy.
 
-1. **yBGT**: Most frequently optimal (45.2% of decisions)
-2. **iBGT**: Moderately optimal (29.3% of decisions)  
-3. **LBGT**: Least frequently optimal (25.5% of decisions)
-
-This data demonstrates the value of dynamic allocation versus static positioning in any single token.
+**Ecosystem Evolution**: The automatic incorporation of yBGT upon its launch exemplifies how Berancia's strategy scales with ecosystem growth. As more Liquid BGT tokens enter the market and price competition intensifies, individual token strategies will converge towards similar yields, making dynamic routing increasingly valuable for capturing temporary yield premiums and arbitrage opportunities.
 
 ## Conclusion
 
-Berancia's **dynamic routing + continuous compounding** strategy delivers:
+Berancia's **dynamic routing + 10-minute compounding** strategy delivers:
 
-1. **🎯 Smart Capital Allocation**: Always routes to highest-performing asset among LBGT, iBGT, and yBGT
-2. **⚡ Maximum Compound Growth**: Continuous reinvestment vs daily limitations  
+1. **🎯 Smart Capital Allocation**: Always routes to highest-performing asset among available LST tokens
+2. **⚡ Frequent Compound Growth**: 10-minute reinvestment vs daily limitations  
 3. **📊 Consistent Outperformance**: 19-31% better returns across all individual token strategies
-4. **🔄 Market Adaptability**: Responds to changing token performance in real-time
+4. **🔄 Market Adaptability**: 178 routing switches demonstrate real-time response to changing token performance
+5. **🚀 Future-Proof Design**: Automatically incorporates new LST tokens (like yBGT) as they launch in the ecosystem
 
 **Bottom Line**: Berancia transforms static LST token strategies into an intelligent, adaptive yield optimization system that consistently captures the best opportunities in the Berachain LST ecosystem.
 
 ---
 
-*Analysis based on backtest data from March 2025 and 1-year forward simulations using average APR values. Updated analysis reflects comparison with LBGT and iBGT strategies.*
+*Analysis based on backtest data from March 2025 and 1-year forward simulations using average APR values. Updated analysis reflects comparison between auto_10m Berancia strategy and individual LBGT and iBGT strategies with daily compounding.*

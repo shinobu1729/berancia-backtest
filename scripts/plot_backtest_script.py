@@ -318,12 +318,17 @@ class ROIChartCreator:
         other_strategies = {}
 
         for strategy, df in data_dict.items():
-            if strategy.startswith("berancia_0m") or "auto_0m" in strategy:
+            if strategy.startswith("berancia_") or "auto_" in strategy:
                 auto_strategy = (strategy, df)
             else:
                 other_strategies[strategy] = df
 
-        # Plot other strategies first (background)
+        # Add routing switch indicators first (background)
+        if auto_strategy:
+            strategy, df = auto_strategy
+            self._add_routing_switch_lines(df)
+
+        # Plot other strategies
         for strategy, df in other_strategies.items():
             self._plot_single_apr_yield_strategy(strategy, df, linewidth=1.5, alpha=1)
 
@@ -402,6 +407,46 @@ class ROIChartCreator:
 
         # Tight layout
         plt.tight_layout()
+
+    def _add_routing_switch_lines(self, auto_df: pd.DataFrame) -> None:
+        """Add vertical lines to indicate routing switches in auto strategy."""
+        try:
+            # Find routing switches
+            auto_df_copy = auto_df.copy()
+            auto_df_copy['prev_route'] = auto_df_copy['route_symbol'].shift(1)
+            
+            # Find where routing symbol changes
+            switch_mask = auto_df_copy['route_symbol'] != auto_df_copy['prev_route']
+            routing_switches = auto_df_copy[switch_mask].dropna()
+            
+            if len(routing_switches) == 0:
+                logging.info("No routing switches found in auto strategy")
+                return
+            
+            # Add vertical lines at all switch points
+            for _, row in routing_switches.iterrows():
+                switch_date = row['date']
+                
+                # Add vertical line in black color with lower opacity
+                plt.axvline(
+                    x=switch_date,
+                    color='black',
+                    linestyle='--',
+                    alpha=0.3,
+                    linewidth=0.5,
+                    zorder=0  # Put lines in background
+                )
+            
+            # Add legend entry for routing switches
+            if len(routing_switches) > 0:
+                # Create a dummy line for legend
+                plt.plot([], [], color='black', linestyle='--', alpha=0.3, linewidth=0.5, 
+                        label=f'Auto Routing Switches ({len(routing_switches)} total)')
+            
+            logging.info(f"Added {len(routing_switches)} routing switch indicators")
+            
+        except Exception as e:
+            logging.warning(f"Could not add routing switch indicators: {e}")
 
 
 class BacktestVisualizer:
