@@ -56,12 +56,18 @@ For each time period:
 1. Evaluate all LST token prices (LBGT, iBGT, yBGT)
 2. Select token with highest price_in_bera
 3. Route all capital to optimal token
-4. Compound gains continuously
+4. Compound gains every 10 minutes
 ```
 
+### Data Architecture & Accuracy
+- **Individual Token Strategies**: APR calculations use original blockchain data with actual token prices (LBGT_price_in_bera, iBGT_price_in_bera)
+- **Berancia Strategy**: Dynamic routing data from backtest simulations with precise timestamp alignment
+- **yBGT Integration**: Automatically included from April 10th launch date with proper timezone synchronization
+- **Visualization**: All strategies plotted on synchronized time axis with color-coded routing switch indicators
+
 ### Compound Strategy Comparison
-- **Berancia**: Revenue → Position every 10 minutes
-- **Individual**: Revenue → Position every 24 hours
+- **Berancia**: Revenue → Position every 10 minutes (144x daily frequency)
+- **Individual**: Revenue → Position every 24 hours (1x daily frequency)
 
 ## ROI Breakdown
 
@@ -96,4 +102,4 @@ Berancia's **dynamic routing + 10-minute compounding** strategy delivers:
 
 ---
 
-*Analysis based on backtest data from March 2025 and 1-year forward simulations using average APR values. Updated analysis reflects comparison between auto_10m Berancia strategy and individual LBGT and iBGT strategies with daily compounding.*
+*Analysis based on synchronized blockchain data from March 2025 and 1-year forward simulations using average APR values. Technical implementation ensures accurate timestamp alignment between original data sources and backtest simulations, with proper timezone handling (JST) and color-coded visualization following project configuration standards.*

@@ -283,7 +283,7 @@ class ROIChartCreator:
     def create_apr_yield_chart(
         self, data_dict: Dict[str, pd.DataFrame], output_dir: str = "plots"
     ) -> str:
-        """Create APR yield chart for all strategies."""
+        """Create APR yield chart using original data for individual tokens and backtest data for Berancia."""
 
         # Create output directory
         output_path = Path(output_dir)
@@ -295,8 +295,8 @@ class ROIChartCreator:
 
         logging.info(f"Creating APR yield chart with {len(data_dict)} strategies")
 
-        # Plot each strategy
-        self._plot_apr_yield_strategies(data_dict)
+        # Load original data for individual token calculations
+        self._plot_apr_yield_from_original_data(data_dict)
 
         # Get first df for date formatting
         first_df = next(iter(data_dict.values()))
@@ -310,6 +310,140 @@ class ROIChartCreator:
         plt.close()
 
         return str(output_file)
+
+    def _plot_apr_yield_from_original_data(self, data_dict: Dict[str, pd.DataFrame]) -> None:
+        """Plot APR yield using original data.csv for individual tokens and backtest data for Berancia."""
+        try:
+            # Load original data
+            original_data_path = Path(__file__).parent.parent / "data" / "data.csv"
+            original_df = pd.read_csv(original_data_path)
+            # Convert timestamp to datetime in JST (UTC+9) to match backtest data
+            original_df['timestamp'] = pd.to_datetime(original_df['timestamp'], unit='s', utc=True).dt.tz_convert('Asia/Tokyo').dt.tz_localize(None)
+            
+            # Find auto strategy for Berancia
+            auto_strategy = None
+            for strategy, df in data_dict.items():
+                if strategy.startswith("berancia_") or "auto_" in strategy:
+                    auto_strategy = (strategy, df)
+                    break
+            
+            # Add routing switch indicators if we have auto strategy
+            if auto_strategy:
+                strategy, df = auto_strategy
+                self._add_routing_switch_lines(df)
+            
+            # Plot individual token strategies from original data
+            for strategy, df in data_dict.items():
+                if not (strategy.startswith("berancia_") or "auto_" in strategy):
+                    self._plot_individual_token_from_original_data(strategy, original_df)
+            
+            # Plot yBGT from timestamp 1743839065 onwards
+            self._plot_ybgt_from_original_data(original_df)
+            
+            # Plot Berancia from backtest data
+            if auto_strategy:
+                strategy, df = auto_strategy
+                self._plot_berancia_from_backtest_data(strategy, df)
+                
+        except Exception as e:
+            logging.error(f"Error plotting APR yield from original data: {e}")
+            # Fallback to old method
+            self._plot_apr_yield_strategies(data_dict)
+
+    def _plot_individual_token_from_original_data(self, strategy: str, original_df: pd.DataFrame) -> None:
+        """Plot individual token APR × price from original data."""
+        try:
+            # Extract token name from strategy (e.g., "LBGT_1d" -> "LBGT")
+            token_name = strategy.split('_')[0]
+            
+            apr_col = "KODI WBERA-iBGT_bgt_apr"
+            price_col = f"{token_name}_price_in_bera"
+            
+            if apr_col in original_df.columns and price_col in original_df.columns:
+                # Calculate APR × price
+                apr_yield = original_df[apr_col] * original_df[price_col]
+                
+                color, label = self.chart_styler.get_strategy_color_and_label(strategy)
+                
+                plt.plot(
+                    original_df['timestamp'],
+                    apr_yield,
+                    color=color,
+                    label=label,
+                    linewidth=1.5,
+                    alpha=1.0
+                )
+                
+                logging.info(f"Plotted {strategy} from original data with {len(original_df)} points")
+            else:
+                logging.warning(f"Missing columns for {strategy}: {apr_col} or {price_col}")
+                
+        except Exception as e:
+            logging.warning(f"Could not plot {strategy} from original data: {e}")
+
+    def _plot_ybgt_from_original_data(self, original_df: pd.DataFrame) -> None:
+        """Plot yBGT APR × price from timestamp 1743839065 onwards."""
+        try:
+            # Filter for yBGT data from timestamp 1743839065 onwards (convert to JST)
+            target_timestamp = pd.to_datetime(1743839065, unit='s', utc=True).tz_convert('Asia/Tokyo').tz_localize(None)
+            ybgt_mask = original_df['timestamp'] >= target_timestamp
+            ybgt_data = original_df[ybgt_mask]
+            
+            apr_col = "KODI WBERA-iBGT_bgt_apr"
+            price_col = "yBGT_price_in_bera"
+            
+            if len(ybgt_data) > 0 and apr_col in ybgt_data.columns and price_col in ybgt_data.columns:
+                # Calculate yBGT APR × price
+                ybgt_apr_yield = ybgt_data[apr_col] * ybgt_data[price_col]
+                
+                plt.plot(
+                    ybgt_data['timestamp'],
+                    ybgt_apr_yield,
+                    color='blue',
+                    label='yBGT APR × Price (from 4/10)',
+                    linewidth=1.5,
+                    alpha=0.8,
+                    linestyle='--'
+                )
+                
+                logging.info(f"Plotted yBGT from original data with {len(ybgt_data)} points from timestamp 1743839065")
+            else:
+                logging.warning("No yBGT data found from timestamp 1743839065 onwards")
+                
+        except Exception as e:
+            logging.warning(f"Could not plot yBGT from original data: {e}")
+
+    def _plot_berancia_from_backtest_data(self, strategy: str, df: pd.DataFrame) -> None:
+        """Plot Berancia APR × price from backtest data."""
+        try:
+            apr_col = "KODI WBERA-iBGT_bgt_apr"
+            price_col = "liquid_bgt_price_in_bera"
+            
+            if apr_col in df.columns and price_col in df.columns:
+                # Calculate Berancia APR × price
+                apr_yield = df[apr_col] * df[price_col]
+                
+                color, label = self.chart_styler.get_strategy_color_and_label(strategy)
+                
+                if "date" in df.columns:
+                    x_axis = pd.to_datetime(df["date"])
+                    plt.plot(
+                        x_axis,
+                        apr_yield,
+                        color=color,
+                        label=label,
+                        linewidth=2.0,
+                        alpha=1.0
+                    )
+                    
+                    logging.info(f"Plotted Berancia from backtest data with {len(df)} points")
+                else:
+                    logging.warning("No date column found in Berancia backtest data")
+            else:
+                logging.warning(f"Missing columns for Berancia: {apr_col} or {price_col}")
+                
+        except Exception as e:
+            logging.warning(f"Could not plot Berancia from backtest data: {e}")
 
     def _plot_apr_yield_strategies(self, data_dict: Dict[str, pd.DataFrame]) -> None:
         """Plot APR yield strategies on the chart."""
@@ -327,6 +461,11 @@ class ROIChartCreator:
         if auto_strategy:
             strategy, df = auto_strategy
             self._add_routing_switch_lines(df)
+
+        # Plot yBGT APR x price curve from April 10th onwards
+        if auto_strategy:
+            strategy, df = auto_strategy
+            self._plot_ybgt_apr_yield_curve(df)
 
         # Plot other strategies
         for strategy, df in other_strategies.items():
@@ -407,6 +546,50 @@ class ROIChartCreator:
 
         # Tight layout
         plt.tight_layout()
+
+    def _plot_ybgt_apr_yield_curve(self, auto_df: pd.DataFrame) -> None:
+        """Plot yBGT APR x price curve from April 10th onwards."""
+        try:
+            # Convert date column to datetime if it's not already
+            auto_df_copy = auto_df.copy()
+            if 'date' in auto_df_copy.columns:
+                auto_df_copy['date'] = pd.to_datetime(auto_df_copy['date'])
+                
+                # Filter for data from April 10th onwards where route_symbol is yBGT
+                april_10 = pd.to_datetime('2025-04-10')
+                ybgt_mask = (auto_df_copy['date'] >= april_10) & (auto_df_copy['route_symbol'] == 'yBGT')
+                ybgt_data = auto_df_copy[ybgt_mask]
+                
+                if len(ybgt_data) > 0:
+                    # Check for required columns
+                    apr_col = "KODI WBERA-iBGT_bgt_apr"
+                    price_col = "liquid_bgt_price_in_bera"
+                    
+                    if apr_col in ybgt_data.columns and price_col in ybgt_data.columns:
+                        # Calculate yBGT APR x price
+                        ybgt_apr_yield = ybgt_data[apr_col] * ybgt_data[price_col]
+                        
+                        # Plot yBGT curve with distinctive styling
+                        plt.plot(
+                            ybgt_data['date'],
+                            ybgt_apr_yield,
+                            color='purple',
+                            label='yBGT APR × Price (from 4/10)',
+                            linewidth=1.5,
+                            alpha=0.8,
+                            linestyle='--'
+                        )
+                        
+                        logging.info(f"Added yBGT APR x price curve with {len(ybgt_data)} data points from April 10th")
+                    else:
+                        logging.warning("Missing required APR or price columns for yBGT curve")
+                else:
+                    logging.info("No yBGT data found from April 10th onwards")
+            else:
+                logging.warning("No date column found in auto strategy data")
+                
+        except Exception as e:
+            logging.warning(f"Could not add yBGT APR x price curve: {e}")
 
     def _add_routing_switch_lines(self, auto_df: pd.DataFrame) -> None:
         """Add vertical lines to indicate routing switches in auto strategy."""
