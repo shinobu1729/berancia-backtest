@@ -280,6 +280,129 @@ class ROIChartCreator:
         # Tight layout
         plt.tight_layout()
 
+    def create_apr_yield_chart(
+        self, data_dict: Dict[str, pd.DataFrame], output_dir: str = "plots"
+    ) -> str:
+        """Create APR yield chart for all strategies."""
+
+        # Create output directory
+        output_path = Path(output_dir)
+        output_path.mkdir(parents=True, exist_ok=True)
+
+        # Setup the plot
+        plt.figure(figsize=config.CHART_FIGURE_SIZE)
+        plt.style.use("default")
+
+        logging.info(f"Creating APR yield chart with {len(data_dict)} strategies")
+
+        # Plot each strategy
+        self._plot_apr_yield_strategies(data_dict)
+
+        # Get first df for date formatting
+        first_df = next(iter(data_dict.values()))
+
+        # Format chart
+        self._format_apr_yield_chart(first_df)
+
+        # Save chart
+        output_file = output_path / "backtest_apr_yield_comparison.png"
+        plt.savefig(output_file, dpi=config.CHART_DPI, bbox_inches="tight")
+        plt.close()
+
+        return str(output_file)
+
+    def _plot_apr_yield_strategies(self, data_dict: Dict[str, pd.DataFrame]) -> None:
+        """Plot APR yield strategies on the chart."""
+        # Special handling for auto strategy to make it prominent
+        auto_strategy = None
+        other_strategies = {}
+
+        for strategy, df in data_dict.items():
+            if strategy.startswith("berancia_0m") or "auto_0m" in strategy:
+                auto_strategy = (strategy, df)
+            else:
+                other_strategies[strategy] = df
+
+        # Plot other strategies first (background)
+        for strategy, df in other_strategies.items():
+            self._plot_single_apr_yield_strategy(strategy, df, linewidth=1.5, alpha=1)
+
+        # Plot auto strategy last (foreground) with emphasis
+        if auto_strategy:
+            strategy, df = auto_strategy
+            self._plot_single_apr_yield_strategy(strategy, df, linewidth=2.0, alpha=1.0)
+
+    def _plot_single_apr_yield_strategy(
+        self, strategy: str, df: pd.DataFrame, linewidth: float, alpha: float
+    ) -> None:
+        """Plot a single APR yield strategy."""
+        color, label = self.chart_styler.get_strategy_color_and_label(strategy)
+
+        # Check for required columns
+        apr_col = "KODI WBERA-iBGT_bgt_apr"
+        price_col = "liquid_bgt_price_in_bera"
+
+        if apr_col not in df.columns or price_col not in df.columns:
+            logging.warning(f"Missing required columns in {strategy}, skipping")
+            return
+
+        # Calculate y = apr * price
+        apr_yield = df[apr_col] * df[price_col]
+
+        # Use date if available, otherwise use index
+        if "date" in df.columns:
+            x_axis = df["date"]
+            plt.plot(
+                x_axis,
+                apr_yield,
+                color=color,
+                label=label,
+                linewidth=linewidth,
+                alpha=alpha,
+            )
+            logging.debug(
+                f"Plotted {strategy} APR yield from {x_axis.iloc[0]} to {x_axis.iloc[-1]}"
+            )
+        else:
+            x_axis = range(len(df))
+            plt.plot(
+                x_axis,
+                apr_yield,
+                color=color,
+                label=label,
+                linewidth=linewidth,
+                alpha=alpha,
+            )
+            logging.debug(
+                f"Plotted {strategy} APR yield with index range 0 to {len(df)}"
+            )
+
+    def _format_apr_yield_chart(self, first_df: pd.DataFrame) -> None:
+        """Apply formatting to the APR yield chart."""
+        # Title and labels
+        plt.title(
+            "BGT APR × Liquid BGT Price Comparison",
+            fontsize=config.CHART_TITLE_FONTSIZE,
+            fontweight="bold",
+            pad=20,
+        )
+        plt.xlabel("Date", fontsize=config.CHART_AXIS_FONTSIZE)
+        plt.ylabel("APR × Price", fontsize=config.CHART_AXIS_FONTSIZE)
+
+        # Format x-axis dates
+        ax = plt.gca()
+        logging.info("Applying date formatting to X-axis...")
+        self.chart_styler.configure_date_axis(ax, first_df)
+
+        # Grid and legend
+        plt.grid(True, alpha=config.CHART_GRID_ALPHA)
+        plt.legend(
+            loc=config.CHART_LEGEND_LOCATION, framealpha=config.CHART_LEGEND_ALPHA
+        )
+
+        # Tight layout
+        plt.tight_layout()
+
 
 class BacktestVisualizer:
     """Main class for backtest visualization."""
@@ -292,23 +415,32 @@ class BacktestVisualizer:
     def plot_backtest_results(
         self, backtest_dir: str = "data/backtest", output_dir: str = "plots"
     ) -> List[str]:
-        """Create ROI chart for all backtest strategies."""
+        """Create ROI and APR yield charts for all backtest strategies."""
 
         # Load all strategies
         all_strategies = self.data_loader.load_all_strategies(backtest_dir)
 
-        # Create chart if data exists
+        # Create charts if data exists
         output_files = []
 
         if len(all_strategies) > 0:
             try:
-                output_file = self.chart_creator.create_roi_chart(
+                # Create ROI chart
+                roi_output_file = self.chart_creator.create_roi_chart(
                     all_strategies, output_dir
                 )
-                output_files.append(output_file)
-                logging.info(f"Created chart: {output_file}")
+                output_files.append(roi_output_file)
+                logging.info(f"Created ROI chart: {roi_output_file}")
+
+                # Create APR yield chart
+                apr_output_file = self.chart_creator.create_apr_yield_chart(
+                    all_strategies, output_dir
+                )
+                output_files.append(apr_output_file)
+                logging.info(f"Created APR yield chart: {apr_output_file}")
+
             except Exception as e:
-                logging.error(f"Error creating ROI chart: {e}")
+                logging.error(f"Error creating charts: {e}")
         else:
             logging.warning("No valid data found for charting")
 
