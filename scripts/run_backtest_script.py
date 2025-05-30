@@ -39,6 +39,10 @@ def parse_interval(interval_str: str) -> int:
 
 def get_route_symbol(row_data: Dict[str, str], mode: str) -> str:
     """Determine routing symbol based on backtest mode."""
+    if mode == "BGT":
+        # BGT mode doesn't route to any specific token
+        return "BGT"
+    
     if mode != "auto":
         valid_symbols = [token["symbol"] for token in config.LST_TOKENS]
         if mode not in valid_symbols:
@@ -141,8 +145,14 @@ class BacktestProcessor:
 
         # Handle compounding
         if should_compound_now and i > 0:
-            liquid_bgt_price = get_token_price(row, self.route_symbol)
-            compound_amount = self.revenue * liquid_bgt_price
+            if self.mode == "BGT":
+                # BGT mode: compound revenue directly without multiplying by price
+                compound_amount = self.revenue
+            else:
+                # Normal mode: multiply by liquid BGT price
+                liquid_bgt_price = get_token_price(row, self.route_symbol)
+                compound_amount = self.revenue * liquid_bgt_price
+            
             self.position += compound_amount
             self.revenue = 0.0
             self.last_compound_ts = timestamp
@@ -152,16 +162,28 @@ class BacktestProcessor:
                 self.route_symbol = get_route_symbol(row, self.mode)
 
         # Create result row
-        liquid_bgt_price = get_token_price(row, self.route_symbol)
-        result_row = {
-            "block": block_number,
-            "date": date_str,
-            "route_symbol": self.route_symbol,
-            f"{lp_symbol}_bgt_apr": bgt_apr,
-            "liquid_bgt_price_in_bera": liquid_bgt_price,
-            "revenue": self.revenue,
-            "position": self.position,
-        }
+        if self.mode == "BGT":
+            # BGT mode: no liquid BGT price
+            result_row = {
+                "block": block_number,
+                "date": date_str,
+                "route_symbol": self.route_symbol,
+                f"{lp_symbol}_bgt_apr": bgt_apr,
+                "revenue": self.revenue,
+                "position": self.position,
+            }
+        else:
+            # Normal mode: include liquid BGT price
+            liquid_bgt_price = get_token_price(row, self.route_symbol)
+            result_row = {
+                "block": block_number,
+                "date": date_str,
+                "route_symbol": self.route_symbol,
+                f"{lp_symbol}_bgt_apr": bgt_apr,
+                "liquid_bgt_price_in_bera": liquid_bgt_price,
+                "revenue": self.revenue,
+                "position": self.position,
+            }
 
         self.results.append(result_row)
 
@@ -287,12 +309,15 @@ Examples:
 
   # Auto routing with hourly compounding
   python scripts/run_backtest_script.py --csv data/data.csv --mode auto --interval 1h
+
+  # BGT mode (no liquid BGT price multiplication) with daily compounding
+  python scripts/run_backtest_script.py --csv data/data.csv --mode BGT --interval 1d
 """,
     )
 
     parser.add_argument("--csv", required=True, help="Path to input CSV file")
     parser.add_argument(
-        "--mode", default="auto", help="Routing mode: 'auto' or specific symbol"
+        "--mode", default="auto", help="Routing mode: 'auto', 'BGT', or specific symbol"
     )
     parser.add_argument(
         "--interval",

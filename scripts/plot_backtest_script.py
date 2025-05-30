@@ -123,6 +123,10 @@ class ChartStyler:
             interval = "_".join(parts[1:]) if len(parts) > 1 else ""
             label_suffix = f" ({interval})" if interval else ""
 
+        # Special handling for BGT mode
+        if base_strategy == "BGT":
+            return "green", f"BGT{label_suffix}"
+
         if base_strategy in config.CHART_COLORS:
             color_config = config.CHART_COLORS[base_strategy]
             label = color_config["label"] + label_suffix

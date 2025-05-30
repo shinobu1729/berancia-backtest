@@ -55,6 +55,7 @@ def run_extension_simulation(
     start_date: datetime,
     avg_interval_seconds: int,
     points_needed: int,
+    is_bgt_mode: bool = False,
 ) -> List[Dict]:
     """Run extension simulation using the same logic as run_backtest_script.py."""
 
@@ -90,8 +91,12 @@ def run_extension_simulation(
 
         # Handle compounding (same logic as run_backtest_script.py)
         if should_compound_now and i > 0:
-            # Since avg_liquid_bgt_apr already includes price, compound_amount = revenue
-            compound_amount = revenue
+            if is_bgt_mode:
+                # BGT mode: compound revenue directly without price multiplication
+                compound_amount = revenue
+            else:
+                # Normal mode: avg_liquid_bgt_apr already includes price
+                compound_amount = revenue
             position += compound_amount
             revenue = 0.0
             last_compound_ts = timestamp
@@ -129,24 +134,34 @@ class BacktestExtender:
                 return "_".join(parts[1:-1])
             return "unknown"
 
-    def calculate_average_apr(self, df: pd.DataFrame) -> float:
+    def calculate_average_apr(self, df: pd.DataFrame, is_bgt_mode: bool = False) -> float:
         """Calculate average liquid BGT APR from backtest data."""
         apr_col = "KODI WBERA-iBGT_bgt_apr"
-        price_col = "liquid_bgt_price_in_bera"
-
-        if apr_col not in df.columns or price_col not in df.columns:
-            logging.warning("Missing required columns for APR calculation")
+        
+        if apr_col not in df.columns:
+            logging.warning("Missing APR column for calculation")
             return 0.0
-
-        # Calculate liquid BGT APR: apr * price
-        liquid_bgt_apr = df[apr_col] * df[price_col]
-        avg_apr = liquid_bgt_apr.mean()
-
-        logging.info(f"Calculated average liquid BGT APR: {avg_apr:.2f}%")
+        
+        if is_bgt_mode:
+            # BGT mode: use raw APR without price multiplication
+            avg_apr = df[apr_col].mean()
+            logging.info(f"Calculated average BGT APR (raw): {avg_apr:.2f}%")
+        else:
+            # Normal mode: multiply by price
+            price_col = "liquid_bgt_price_in_bera"
+            if price_col not in df.columns:
+                logging.warning("Missing price column for APR calculation")
+                return 0.0
+            
+            # Calculate liquid BGT APR: apr * price
+            liquid_bgt_apr = df[apr_col] * df[price_col]
+            avg_apr = liquid_bgt_apr.mean()
+            logging.info(f"Calculated average liquid BGT APR: {avg_apr:.2f}%")
+        
         return avg_apr
 
     def extend_to_one_year(
-        self, df: pd.DataFrame, avg_liquid_bgt_apr: float, interval: str
+        self, df: pd.DataFrame, avg_liquid_bgt_apr: float, interval: str, is_bgt_mode: bool = False
     ) -> pd.DataFrame:
         """Extend backtest data to simulate 1 year total from first data point."""
 
@@ -194,6 +209,7 @@ class BacktestExtender:
             start_date=last_date,
             avg_interval_seconds=self.avg_interval_seconds,
             points_needed=points_needed,
+            is_bgt_mode=is_bgt_mode,
         )
 
         # Combine original and extended data
@@ -216,17 +232,20 @@ class BacktestExtender:
 
             logging.info(f"Processing {file_path.name}: {len(df)} rows")
 
-            # Extract interval and calculate average APR
+            # Extract interval and check if BGT mode
             interval = self.parse_interval_from_filename(file_path.name)
-            avg_liquid_bgt_apr = self.calculate_average_apr(df)
+            is_bgt_mode = file_path.stem.startswith("BGT_")
+            
+            # Calculate average APR based on mode
+            avg_liquid_bgt_apr = self.calculate_average_apr(df, is_bgt_mode)
 
             logging.info(
                 f"Strategy: {file_path.stem}, Interval: {interval}, "
-                f"Avg Liquid BGT APR: {avg_liquid_bgt_apr:.2f}%"
+                f"Avg {'BGT' if is_bgt_mode else 'Liquid BGT'} APR: {avg_liquid_bgt_apr:.2f}%"
             )
 
             # Extend to 1 year
-            extended_df = self.extend_to_one_year(df, avg_liquid_bgt_apr, interval)
+            extended_df = self.extend_to_one_year(df, avg_liquid_bgt_apr, interval, is_bgt_mode)
 
             # Save extended data
             output_path = Path(output_dir)
@@ -306,6 +325,10 @@ class BacktestExtender:
 
                 # Get color and styling from config
                 color, label = self._get_strategy_style(base_strategy, interval)
+                
+                # Special handling for BGT mode label
+                if base_strategy == "BGT":
+                    label = f"BGT mode ({interval})"
 
                 # Calculate ROI based on strategy type
                 # All strategies now use position for ROI calculation
@@ -380,13 +403,16 @@ class BacktestExtender:
         """Get color and label for strategy from config.
 
         Args:
-            base_strategy: Base strategy name (e.g., 'auto', 'LBGT')
+            base_strategy: Base strategy name (e.g., 'auto', 'LBGT', 'BGT')
             interval: Interval string (e.g., '0m', '1d')
 
         Returns:
             Tuple of (color, label)
         """
-        if hasattr(config, "CHART_COLORS") and base_strategy in config.CHART_COLORS:
+        if base_strategy == "BGT":
+            # Special styling for BGT mode
+            return "green", f"BGT ({interval})"
+        elif hasattr(config, "CHART_COLORS") and base_strategy in config.CHART_COLORS:
             color_config = config.CHART_COLORS[base_strategy]
             label = color_config["label"] + f" ({interval})"
             return color_config["color"], label
